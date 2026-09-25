@@ -1,38 +1,52 @@
-# MILEHIGH-WORLD: Into the Void
+# Milehigh World: Into the Void
 
-**Status:** Active Development  
-**Core Architecture:** C# (Unity), TypeScript, TSX  
+**Platform:** Android (Kotlin, Jetpack Compose, Material 3)  
+**Architecture:** MVVM with StateFlow, Coroutines, and Sentinel Parity Engine  
 **Aesthetic:** Neo-Arcane Fractured Realism  
 
-## System Overview
-The primary framework repository for **Milehigh.World: Into the Void**. This architecture orchestrates a high-fidelity science-fantasy VR MMORPG environment, leveraging autonomous agentic AI, procedural logic via the Infiniteration Engine, and trustless data ownership protocols.
+## Overview
+An interactive Android tactical campaign director and companion app for **Milehigh World: Into the Void**. Ported from the original Unity/C# Infiniteration Engine architecture, preserving the full multiversal campaign, autonomous character behavior scripts, Alliance Power synchronization protocols, and Sentinel parity validation rules.
 
-## Core Technical Pillars
+## Core Features & Ported Systems
 
-### 1. The Infiniteration Engine (Unity Core)
-* **Environment:** Unity (HDRP), C#
-* **Execution:** Zero-allocation procedural generation relying heavily on the Unity Burst compiler for maximum multithreaded performance.
-* **Mathematical Foundation:** System states, procedural scaling, and vortex mathematics are strictly governed by **9-bit parity** and the **Conservation of Nine**.
-* **Rendering Pipelines:** Implementation of custom volumetric configurations and the `HyperrealisticPlatformShader` to maintain visual consistency.
+### 1. Multiversal Campaign Director (`CampaignScreen`)
+- **Act & Chapter Timeline**: Complete narrative progression across:
+  - *Act I · Chapter 1*: Onalym Nexus (King Cyrus invasion, durasteel extrusion, dimensional shifting)
+  - *Act I · Chapter 2*: The Crash Site (Kepler-186f wreckage, stability index repair)
+  - *Act II · Chapter 3*: Aethylgard Fjords (Aerial combat against Kane, Lyra's solar barrier)
+  - *Act III · Chapter 5*: Concord Purification (Purging Delilah's voidfire)
+  - *Act IV · Final Raid*: The Grand Purpose (10-player Onalym Core raid, TSIDKENU strike)
+- **Interactive 3D Objects & Vectors**: Real-time adjustment of scalar values (Aura radius, void shockwave scale) and 3D coordinate vectors `(X, Y, Z)` with live Sentinel bounds verification.
+- **BattleREM Narrative Dialogue**: Speaker badges, authentic quotes, and trigger dispatching.
 
-### 2. Autonomous Systems & AI Integration
-* **Agentic Framework:** LLM-driven infrastructure governing dynamic behaviors and emergent narrative states for entities like Sky.ix.
-* **BattleREM Protocol:** The primary relational engagement memory system. It tracks and persists stateful relationship variables, ensuring dynamic interactions with characters such as Micah and Ingris.
+### 2. Champion Archive & Ability Simulator (`ChampionsScreen`)
+- **Champion Dossiers**: Micah the Unbreakable, Omega.one (The Architect), King Cyrus the Dragon King, Aeron the Brave, Anastasia the Dreamer, and Delilah the Desolate / Ingris.
+- **Active Tactical Ability Chamber**:
+  - *Micah*: Kinetic force redirection (+15 Flow Meter, dynamic Gauntlet Extrusion up to 3.5x).
+  - *Omega.one*: Gemini Logic reconciliation (shard repair, stability index restoration).
+  - *Aeron*: Airborne Ginga Stance & Void Lightning Stomp.
+  - *Anastasia*: Dreamscape Reverie trance (weaves Dream Harmony & Blinding Truth).
+  - *Delilah / Ingris*: Authentic boss phase logic requiring Dream Harmony + Blinding Truth to implode voidfire and restore Ingris the Untainted!
+  - *King Cyrus*: Void shockwave distortion.
+- **Autonomous Behavior Script Inspector**: Expandable viewer for raw character scripts.
 
-### 3. Sovereign Infrastructure (`idsov`)
-* **Stack:** TypeScript, TSX
-* **Function:** Web-based interfaces and decentralized infrastructure ensuring player data sovereignty. Handles multi-tenant encryption, player-generated lore validation, and external node communication.
+### 3. Onalym Core Alliance Command (`AllianceScreen`)
+- **Alliance Synchronization Gauge**: Radial meter tracking 0% to 100% raid synchronization.
+- **Tsidkenu Ultimate Lightning Strike**: High-impact tactical strike at coordinates `(0, 1000, 0)` available upon reaching 100% synchronization.
+- **Split Peel Maneuver**: Engages and disengages tactical vanguard flanking protocols.
+- **Void Saturation Level**: Dynamic slider and warning system regulating void saturation bounds `[0.0, 1.0]`.
+- **Infiniteration Engine Conservation of Nine**: Interactive Vortex Mathematics calculator computing digital root mod 9 for any input frequency or seed.
 
-## Narrative & World-Building Directives
-All systemic code implementations and environmental assets must align with the established physical and dimensional laws of the framework:
-* **Dimensional States:** Clear logic segregation between the **Void** and **Now** realities.
-* **Stabilization Mechanics:** Integration of IX-Nodes is required for reality anchoring and preventing data/environmental degradation.
-* **Threat Vectors:** The primary systemic and narrative antagonistic force is **Nihil**. Code governing corruption, decay, or hostile logic overriding should be categorized under this threat vector.
+### 4. Sentinel Protocol & Parity Gates (`SentinelScreen`)
+- Replicates the Sentinel validation rules from `HorizonGameData.cs` and `validate_implementation.py`:
+  - Scene ID validation
+  - Void Saturation safety limits `[0.0, 1.0]`
+  - 9-bit Parity (`systemParity == 9`)
+  - 3D Interactive Vector schema (`isVector` flag integrity)
+  - BattleREM narrative trigger anchors
 
-## Initialization & Setup
-1. Clone the repository and initialize the Unity environment with the provided HDRP asset packages.
-2. Verify Burst compiler dependencies for the Infiniteration Engine modules.
-3. Configure `idsov` TypeScript environments and ensure local node stabilization before running the web interface.
-
----
-*Copyright 2026 MILEHIGH-WORLD LLC. All Rights Reserved.*
+## Build & Tech Stack
+- **Target SDK**: Android 36 (minSdk 26)
+- **Kotlin**: 2.2.10
+- **UI**: Jetpack Compose with Material 3 Dark Theme
+- **Lifecycle & ViewModel**: AndroidX Lifecycle Runtime & Compose integration

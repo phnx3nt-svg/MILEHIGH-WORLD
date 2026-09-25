@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Milehigh World</string>
+    <string name="subtitle">Into the Void</string>
+    <string name="campaign_title">Multiversal Campaign Director</string>
+    <string name="tab_campaign">Campaign</string>
+    <string name="tab_characters">Champions</string>
+    <string name="tab_alliance">Alliance</string>
+    <string name="tab_sentinel">Sentinel</string>
+</resources>

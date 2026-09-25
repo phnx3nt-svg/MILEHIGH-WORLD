@@ -1,0 +1,6 @@
+{
+  "name": "Milehigh World",
+  "description": "Into the Void - Multiversal neo-arcane science-fantasy campaign companion and tactical mission director.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
