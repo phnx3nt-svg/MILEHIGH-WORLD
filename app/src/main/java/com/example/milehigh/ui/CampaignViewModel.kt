@@ -90,18 +90,27 @@ class CampaignViewModel(application: Application) : AndroidViewModel(application
 
     fun updateInteractiveObject(scenarioId: String, objectId: String, newFloat: Float, newX: Float, newY: Float, newZ: Float) {
         val currentData = _uiState.value.campaignData ?: return
-        val updatedScenarios = currentData.scenarios.map { scenario ->
-            if (scenario.scenarioId == scenarioId) {
-                val updatedObjects = scenario.interactiveObjects.map { obj ->
-                    if (obj.objectId == objectId) {
-                        obj.copy(floatValue = newFloat, x = newX, y = newY, z = newZ)
-                    } else obj
-                }
-                scenario.copy(interactiveObjects = updatedObjects)
-            } else scenario
-        }
 
+        val scenarioIndex = currentData.scenarios.indexOfFirst { it.scenarioId == scenarioId }
+        if (scenarioIndex == -1) return
+        val targetScenario = currentData.scenarios[scenarioIndex]
+
+        val objectIndex = targetScenario.interactiveObjects.indexOfFirst { it.objectId == objectId }
+        if (objectIndex == -1) return
+        val targetObject = targetScenario.interactiveObjects[objectIndex]
+
+        val updatedObject = targetObject.copy(floatValue = newFloat, x = newX, y = newY, z = newZ)
+
+        val updatedObjects = targetScenario.interactiveObjects.toMutableList().apply {
+            this[objectIndex] = updatedObject
+        }
+        val updatedScenario = targetScenario.copy(interactiveObjects = updatedObjects)
+
+        val updatedScenarios = currentData.scenarios.toMutableList().apply {
+            this[scenarioIndex] = updatedScenario
+        }
         val updatedData = currentData.copy(scenarios = updatedScenarios)
+
         val newAudit = SentinelSecurity.runAudit(updatedData)
         _uiState.update {
             it.copy(

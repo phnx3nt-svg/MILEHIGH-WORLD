@@ -64,3 +64,8 @@ dependencies {
 
     debugImplementation(libs.androidx.ui.tooling)
 }
+
+dependencies {
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+}
