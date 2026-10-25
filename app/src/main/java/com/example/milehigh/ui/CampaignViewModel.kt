@@ -12,12 +12,15 @@ import com.example.milehigh.data.CampaignMasterData
 import com.example.milehigh.data.CharacterProfile
 import com.example.milehigh.data.ObjectInteraction
 import com.example.milehigh.data.SceneScenario
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 data class CampaignUiState(
     val campaignData: CampaignMasterData? = null,
@@ -41,17 +44,32 @@ class CampaignViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun loadCampaign() {
-        val data = CampaignDataLoader.loadCampaignData(getApplication())
-        val audit = SentinelSecurity.runAudit(data)
-        _uiState.update {
-            it.copy(
-                campaignData = data,
-                auditReport = audit,
-                isLoading = false,
-                notificationMessage = "Campaign Master initialized. Parity 9 verified."
-            )
+        _uiState.update { it.copy(isLoading = true) }
+        viewModelScope.launch {
+            try {
+                val (data, audit) = withContext(Dispatchers.IO) {
+                    val loadedData = CampaignDataLoader.loadCampaignData(getApplication())
+                    val runAudit = SentinelSecurity.runAudit(loadedData)
+                    Pair(loadedData, runAudit)
+                }
+                _uiState.update {
+                    it.copy(
+                        campaignData = data,
+                        auditReport = audit,
+                        isLoading = false,
+                        notificationMessage = "Campaign Master initialized. Parity 9 verified."
+                    )
+                }
+                allianceManager.setVoidSaturation(data.metadata.voidSaturationLevel)
+            } catch (e: Exception) {
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        notificationMessage = "Failed to load campaign data: ${e.localizedMessage ?: "Unknown error"}"
+                    )
+                }
+            }
         }
-        allianceManager.setVoidSaturation(data.metadata.voidSaturationLevel)
     }
 
     fun selectScenario(index: Int) {
